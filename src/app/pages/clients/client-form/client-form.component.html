@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Crear Cliente</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" formControlName="name" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" formControlName="email" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Teléfono</label>
+      <input class="form-control" formControlName="phone" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Empresa</label>
+      <select class="form-select" formControlName="empresaId">
+        <option *ngFor="let emp of empresas" [value]="emp.id">{{ emp.nombre }}</option>
+      </select>
+    </div>
+    <button class="btn btn-success" type="submit">Guardar</button>
+  </form>
+</div>

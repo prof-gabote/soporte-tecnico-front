@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="mostrarResumen" class="container mt-4">
+  <h2 class="mb-4">Resumen General</h2>
+    <div class="row text-center mb-4">
+      <div class="col-md-4">
+        <div class="card border-danger">
+          <div class="card-body">
+            <h5 class="card-title">Tickets Abiertos</h5>
+            <p class="fs-2 text-danger">{{ totalAbiertos }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-success">
+          <div class="card-body">
+            <h5 class="card-title">Tickets Cerrados</h5>
+            <p class="fs-2 text-success">{{ totalCerrados }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-primary">
+          <div class="card-body">
+            <h5 class="card-title">Clientes Registrados</h5>
+            <p class="fs-2 text-primary">{{ clients.length }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Últimos tickets</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of ultimosTickets">
+          <td>{{ ticket.title }}</td>
+          <td>
+            <span [ngClass]="{
+              'text-danger': ticket.status === 'ABIERTO',
+              'text-success': ticket.status === 'CERRADO'
+            }">{{ ticket.status }}</span>
+          </td>
+          <td>{{ ticket.createdAt | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>

@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Listado de Clientes</h2>
+  <a class="btn btn-primary mb-3" routerLink="/dashboard/clients/new">+ Nuevo Cliente</a>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Empresa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.id }}</td>
+        <td>{{ client.name }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.empresa.nombre }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
