@@ -11,6 +11,8 @@
         <th>Categoría</th>
         <th>Cliente</th>
         <th>Fecha</th>
+        <th>Acciones</th>
+        <th>Eliminar</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +28,17 @@
         <td>{{ ticket.category.name }}</td>
         <td>{{ ticket.clientId }}</td>
         <td>{{ ticket.createdAt | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm" [ngClass]="ticket.status === 'ABIERTO' ? 'btn-success' : 'btn-warning'"
+            (click)="toggleEstado(ticket)">
+            {{ ticket.status === 'ABIERTO' ? 'Cerrar' : 'Reabrir' }}
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminarTicket(ticket.id!)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

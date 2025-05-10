@@ -5,6 +5,7 @@ import { ClientService } from '../../../core/client.service';
 import { Empresa } from '../../../model/client.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { ToastService } from '../../../shared/toast/toast.service';
 
 @Component({
   standalone: true,
@@ -19,7 +20,8 @@ export class ClientFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private clientService: ClientService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toast: ToastService
   ) {
     this.form = this.fb.group({
       name: [''],
@@ -32,7 +34,7 @@ export class ClientFormComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<Empresa[]>(`${environment.apiUrl}/empresas`).subscribe({
       next: (data) => this.empresas = data,
-      error: () => alert('Error cargando empresas')
+      error: () => this.toast.show('Error cargando empresas', 'danger')
     });
   }
 
@@ -43,7 +45,7 @@ export class ClientFormComponent implements OnInit {
     };
 
     this.clientService.create(client).subscribe(() => {
-      alert('Cliente creado');
+      this.toast.show('Cliente creado', 'success');
       this.form.reset();
     });
   }

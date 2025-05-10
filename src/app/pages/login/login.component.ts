@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   standalone: true,
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {
     // Inicializas el formulario dentro del constructor
     this.form = this.fb.group({
@@ -31,7 +33,7 @@ export class LoginComponent {
         this.auth.saveToken(res.token);
         this.router.navigate(['/dashboard']);
       },
-      error: () => alert('Credenciales inválidas')
+      error: () => this.toast.show('Credenciales inválidas', "danger")
     });
   }
 }

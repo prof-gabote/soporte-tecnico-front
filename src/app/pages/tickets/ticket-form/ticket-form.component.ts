@@ -5,6 +5,7 @@ import { TicketService } from '../../../core/ticket.service';
 import { Category } from '../../../model/ticket.model';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { ToastService } from '../../../shared/toast/toast.service';
 
 @Component({
   standalone: true,
@@ -19,7 +20,8 @@ export class TicketFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ticketService: TicketService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toast: ToastService
   ) {
     this.form = this.fb.group({
       title: [''],
@@ -33,7 +35,7 @@ export class TicketFormComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<Category[]>(`${environment.apiUrl}/categorias`).subscribe({
       next: (data) => this.categorias = data,
-      error: () => alert('Error cargando categorías')
+      error: () => this.toast.show('Error cargando categorías', 'danger')
     });
   }
 
@@ -44,7 +46,7 @@ export class TicketFormComponent implements OnInit {
     };
 
     this.ticketService.create(ticket).subscribe(() => {
-      alert('Ticket creado');
+      this.toast.show('Ticket creado', 'success');
       this.form.reset();
     });
   }
