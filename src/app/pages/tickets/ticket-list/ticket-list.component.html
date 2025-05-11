@@ -25,7 +25,7 @@
             'text-success': ticket.status === 'CERRADO'
           }">{{ ticket.status }}</span>
         </td>
-        <td>{{ ticket.category.name }}</td>
+        <td>{{ ticket.category.categoryName }}</td>
         <td>{{ ticket.clientId }}</td>
         <td>{{ ticket.createdAt | date:'short' }}</td>
         <td>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../../../core/client.service';
-import { Empresa } from '../../../model/client.model';
+import { Company } from '../../../model/client.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { ToastService } from '../../../shared/toast/toast.service';
@@ -15,7 +15,7 @@ import { ToastService } from '../../../shared/toast/toast.service';
 })
 export class ClientFormComponent implements OnInit {
   form: FormGroup;
-  empresas: Empresa[] = [];
+  companies: Company[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -24,16 +24,21 @@ export class ClientFormComponent implements OnInit {
     private toast: ToastService
   ) {
     this.form = this.fb.group({
-      name: [''],
-      email: [''],
-      phone: [''],
-      empresaId: [null]
+      fullName: [''],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: [''],
+      companyId: [null]
     });
   }
 
+  get isValidEmail(): boolean {
+    const emailControl = this.form.get('email');
+    return emailControl?.valid || false;
+  }
+
   ngOnInit(): void {
-    this.http.get<Empresa[]>(`${environment.apiUrl}/empresas`).subscribe({
-      next: (data) => this.empresas = data,
+    this.http.get<Company[]>(`${environment.apiUrl}/companies`).subscribe({
+      next: (data) => this.companies = data,
       error: () => this.toast.show('Error cargando empresas', 'danger')
     });
   }
@@ -41,7 +46,7 @@ export class ClientFormComponent implements OnInit {
   onSubmit() {
     const client = {
       ...this.form.value,
-      empresa: { id: this.form.value.empresaId }
+      company: { id: this.form.value.companyId }
     };
 
     this.clientService.create(client).subscribe(() => {

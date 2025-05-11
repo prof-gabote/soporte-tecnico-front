@@ -16,12 +16,12 @@
     <tbody>
       <tr *ngFor="let client of clients">
         <td>{{ client.id }}</td>
-        <td>{{ client.name }}</td>
+        <td>{{ client.fullName }}</td>
         <td>
           <input class="form-control form-control-sm" [(ngModel)]="client.email" />
         </td>
-        <td>{{ client.phone }}</td>
-        <td>{{ client.empresa.nombre }}</td>
+        <td>{{ client.phoneNumber }}</td>
+        <td>{{ client.company.companyName }}</td>
         <td class="d-flex gap-2">
           <button class="btn btn-sm btn-success" (click)="guardarEmail(client)">
             <i class="bi bi-save"></i>

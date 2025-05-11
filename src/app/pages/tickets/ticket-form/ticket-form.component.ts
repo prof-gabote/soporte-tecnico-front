@@ -15,7 +15,7 @@ import { ToastService } from '../../../shared/toast/toast.service';
 })
 export class TicketFormComponent implements OnInit {
   form: FormGroup;
-  categorias: Category[] = [];
+  categories: Category[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,8 +33,8 @@ export class TicketFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<Category[]>(`${environment.apiUrl}/categorias`).subscribe({
-      next: (data) => this.categorias = data,
+    this.http.get<Category[]>(`${environment.apiUrl}/categories`).subscribe({
+      next: (data) => this.categories = data,
       error: () => this.toast.show('Error cargando categorías', 'danger')
     });
   }

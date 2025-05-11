@@ -12,14 +12,14 @@ app.use(bodyParser.json());
 // Datos simulados
 let tickets = [];
 let clients = [];
-let empresas = [
-  { id: 1, nombre: 'Empresa Uno' },
-  { id: 2, nombre: 'Empresa Dos' }
+let companies = [
+  { id: 1, companyName: 'Empresa Uno' },
+  { id: 2, companyName: 'Empresa Dos' }
 ];
-let categorias = [
-  { id: 1, name: 'Soporte Técnico' },
-  { id: 2, name: 'Facturación' },
-  { id: 3, name: 'Consultas Generales' }
+let categories = [
+  { id: 1, categoryName: 'Soporte Técnico' },
+  { id: 2, categoryName: 'Facturación' },
+  { id: 3, categoryName: 'Consultas Generales' }
 ];
 
 let ticketId = 1;
@@ -28,18 +28,18 @@ let clientId = 1;
 // Precargar datos simulados
 clients.push({
   id: clientId++,
-  name: 'Carlos Pérez',
+  fullName: 'Carlos Pérez',
   email: 'carlos@empresa.cl',
-  phone: '+56911112222',
-  empresa: empresas[0]
+  phoneNumber: '+56911112222',
+  company: companies[0]
 });
 
 clients.push({
   id: clientId++,
-  name: 'Ana Gómez',
+  fullName: 'Ana Gómez',
   email: 'ana@empresa.cl',
-  phone: '+56933334444',
-  empresa: empresas[1]
+  phoneNumber: '+56933334444',
+  company: companies[1]
 });
 
 tickets.push({
@@ -48,7 +48,7 @@ tickets.push({
   description: 'Al intentar loguearme, obtengo error 403.',
   status: 'ABIERTO',
   clientId: 1,
-  category: categorias[0],
+  category: categories[0],
   createdAt: new Date().toISOString()
 });
 
@@ -58,7 +58,7 @@ tickets.push({
   description: 'La factura tiene un monto incorrecto.',
   status: 'CERRADO',
   clientId: 2,
-  category: categorias[1],
+  category: categories[1],
   createdAt: new Date(Date.now() - 86400000).toISOString() // ayer
 });
 
@@ -83,26 +83,25 @@ app.use((req, res, next) => {
 });
 
 // 🔹 ENDPOINTS AUXILIARES
-app.get('/empresas', (req, res) => res.json(empresas));
-app.get('/categorias', (req, res) => res.json(categorias));
+app.get('/companies', (req, res) => res.json(companies));
+app.get('/categories', (req, res) => res.json(categories));
 
 // 🔹 CRUD CLIENTES
 app.get('/clients', (req, res) => res.json(clients));
 
 app.post('/clients', (req, res) => {
-  const { empresa } = req.body;
-  const empresaData = empresas.find(e => e.id == empresa.id);
+  const { company } = req.body;
+  const companyData = companies.find(c => c.id == company.id);
 
   const client = {
     id: clientId++,
     ...req.body,
-    empresa: empresaData || null
+    company: companyData || null
   };
   clients.push(client);
   res.status(201).json(client);
 });
 
-// CRUD INDIVIDUAL, UPDATE Y DELETE CLIENTS OMITIDOS PARA ENFOCARSE EN RELACIONES
 app.get('/clients/:id', (req, res) => {
   const client = clients.find(c => c.id == req.params.id);
   client ? res.json(client) : res.sendStatus(404);
@@ -111,8 +110,8 @@ app.get('/clients/:id', (req, res) => {
 app.put('/clients/:id', (req, res) => {
   const index = clients.findIndex(c => c.id == req.params.id);
   if (index >= 0) {
-    const empresaData = empresas.find(e => e.id == req.body.empresa.id);
-    clients[index] = { ...clients[index], ...req.body, empresa: empresaData };
+    const companyData = companies.find(c => c.id == req.body.company.id);
+    clients[index] = { ...clients[index], ...req.body, company: companyData };
     res.json(clients[index]);
   } else {
     res.sendStatus(404);
@@ -129,7 +128,7 @@ app.get('/tickets', (req, res) => res.json(tickets));
 
 app.post('/tickets', (req, res) => {
   const { category } = req.body;
-  const catData = categorias.find(c => c.id == category.id);
+  const catData = categories.find(c => c.id == category.id);
 
   const ticket = {
     id: ticketId++,
@@ -149,7 +148,7 @@ app.get('/tickets/:id', (req, res) => {
 app.put('/tickets/:id', (req, res) => {
   const index = tickets.findIndex(t => t.id == req.params.id);
   if (index >= 0) {
-    const catData = categorias.find(c => c.id == req.body.category.id);
+    const catData = categories.find(c => c.id == req.body.category.id);
     tickets[index] = { ...tickets[index], ...req.body, category: catData };
     res.json(tickets[index]);
   } else {
@@ -165,5 +164,4 @@ app.delete('/tickets/:id', (req, res) => {
 // 🔸 Iniciar servidor
 app.listen(PORT, () => {
   console.log(`✅ Servidor Express corriendo en http://localhost:${PORT}`);
-  console.log(tickets);
 });

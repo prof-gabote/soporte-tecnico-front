@@ -1,12 +1,12 @@
 export interface Client {
   id?: number;
-  name: string;
+  fullName: string;
   email: string;
-  phone: string;
-  empresa: Empresa;
+  phoneNumber: string;
+  company: Company;
 }
 
-export interface Empresa {
+export interface Company {
   id: number;
-  nombre: string;
+  companyName: string;
 }

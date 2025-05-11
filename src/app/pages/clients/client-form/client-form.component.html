@@ -3,22 +3,23 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label class="form-label">Nombre</label>
-      <input class="form-control" formControlName="name" />
+      <input class="form-control" formControlName="fullName" />
     </div>
     <div class="mb-3">
       <label class="form-label">Email</label>
-      <input class="form-control" formControlName="email" />
+      <input class="form-control" formControlName="email" type="email" id="email"/>
     </div>
     <div class="mb-3">
-      <label class="form-label">Teléfono</label>
-      <input class="form-control" formControlName="phone" />
+      <label class="form-label">Teléfono (siga el formato 56911223344)</label>
+      <input class="form-control" formControlName="phoneNumber" type="tel" pattern="569[0-9]{8}"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
     </div>
     <div class="mb-3">
       <label class="form-label">Empresa</label>
-      <select class="form-select" formControlName="empresaId">
-        <option *ngFor="let emp of empresas" [value]="emp.id">{{ emp.nombre }}</option>
+      <select class="form-select" formControlName="companyId">
+        <option *ngFor="let comp of companies" [value]="comp.id">{{ comp.companyName }}</option>
       </select>
     </div>
-    <button class="btn btn-success" type="submit">Guardar</button>
+    <button class="btn btn-success" type="submit" [disabled]="!isValidEmail">Guardar</button>
   </form>
 </div>

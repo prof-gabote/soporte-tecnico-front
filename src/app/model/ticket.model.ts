@@ -10,5 +10,5 @@ export interface Ticket {
 
 export interface Category {
   id: number;
-  name: string;
+  categoryName: string;
 }
