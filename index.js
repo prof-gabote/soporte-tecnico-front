@@ -136,6 +136,7 @@ app.post('/tickets', (req, res) => {
     ...req.body,
     category: catData || null
   };
+  console.log(ticket);
   tickets.push(ticket);
   res.status(201).json(ticket);
 });

@@ -4,8 +4,8 @@ export interface Ticket {
   description: string;
   status: 'ABIERTO' | 'CERRADO';
   clientId: number;
-  categoryId: Category;
-  categoryName: string;
+  categoryId: number;
+  categoryName?: string;
   createdAt?: string;
 }
 

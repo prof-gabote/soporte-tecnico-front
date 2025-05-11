@@ -37,7 +37,7 @@ export class ClientFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<Company[]>(`${environment.apiUrl}/companies`).subscribe({
+    this.http.get<Company[]>(`${environment.apiUrlClients}/companies`).subscribe({
       next: (data) => this.companies = data,
       error: () => this.toast.show('Error cargando empresas', 'danger')
     });

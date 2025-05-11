@@ -8,9 +8,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { userOrEmail: string; password: string }) {
+  login(credentials: { username: string; password: string }) {
+    console.log('Logging in with credentials:', credentials);
     return this.http.post<{ token: string }>(
-      `${environment.apiUrl}/login`,
+      `${environment.apiUrlAuth}/login`,
       credentials
     );
   }

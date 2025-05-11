@@ -22,7 +22,7 @@ export class LoginComponent {
   ) {
     // Inicializas el formulario dentro del constructor
     this.form = this.fb.group({
-      userOrEmail: [''],
+      username: [''],
       password: ['']
     });
   }

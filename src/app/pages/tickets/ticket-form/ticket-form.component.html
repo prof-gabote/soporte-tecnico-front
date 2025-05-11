@@ -19,12 +19,14 @@
     <div class="mb-3">
       <label class="form-label">Categoría</label>
       <select class="form-select" formControlName="categoryId">
-        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.categoryName }}</option>
+        <option *ngFor="let cat of categories" [value]="cat.categoryId">{{ cat.categoryName }}</option>
       </select>
     </div>
     <div class="mb-3">
-      <label class="form-label">ID Cliente</label>
-      <input type="number" class="form-control" formControlName="clientId" />
+      <label class="form-label">Cliente</label>
+      <select class="form-select" formControlName="clientId">
+        <option *ngFor="let c of clients" [value]="c.clientId">{{ c.fullName }} - {{ c.email }}</option>
+      </select>
     </div>
     <button class="btn btn-success" type="submit">Guardar</button>
   </form>

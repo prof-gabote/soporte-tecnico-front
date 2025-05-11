@@ -5,27 +5,27 @@ import { Ticket } from '../model/ticket.model';
 
 @Injectable({ providedIn: 'root' })
 export class TicketService {
-  private api = `${environment.apiUrl}/tickets`;
+  private apiTickets = `${environment.apiUrlTickets}/tickets`;
 
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<Ticket[]>(this.api);
+    return this.http.get<Ticket[]>(this.apiTickets);
   }
 
   getById(id: number) {
-    return this.http.get<Ticket>(`${this.api}/${id}`);
+    return this.http.get<Ticket>(`${this.apiTickets}/${id}`);
   }
 
   create(ticket: Ticket) {
-    return this.http.post<Ticket>(this.api, ticket);
+    return this.http.post<Ticket>(this.apiTickets, ticket);
   }
 
   update(id: number, ticket: Ticket) {
-    return this.http.put<Ticket>(`${this.api}/${id}`, ticket);
+    return this.http.put<Ticket>(`${this.apiTickets}/${id}`, ticket);
   }
 
   delete(id: number) {
-    return this.http.delete<void>(`${this.api}/${id}`);
+    return this.http.delete<void>(`${this.apiTickets}/${id}`);
   }
 }

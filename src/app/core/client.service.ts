@@ -5,7 +5,7 @@ import { Client } from '../model/client.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClientService {
-  private api = `${environment.apiUrl}/clients`;
+  private api = `${environment.apiUrlClients}/clients`;
 
   constructor(private http: HttpClient) {}
 
