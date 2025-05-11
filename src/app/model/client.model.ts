@@ -3,7 +3,8 @@ export interface Client {
   fullName: string;
   email: string;
   phoneNumber: string;
-  company: Company;
+  companyId: number;
+  companyName: string;
 }
 
 export interface Company {
