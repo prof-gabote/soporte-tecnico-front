@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
-        <td>{{ client.id }}</td>
+        <td>{{ client.clientId }}</td>
         <td>{{ client.fullName }}</td>
         <td>
           <input class="form-control form-control-sm" [(ngModel)]="client.email" />
@@ -26,7 +26,7 @@
           <button class="btn btn-sm btn-success" (click)="guardarEmail(client)">
             <i class="bi bi-save"></i>
           </button>
-          <button class="btn btn-sm btn-danger" (click)="eliminarCliente(client.id!)">
+          <button class="btn btn-sm btn-danger" (click)="eliminarCliente(client.clientId!)">
             <i class="bi bi-trash"></i>
           </button>
         </td>

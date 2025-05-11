@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let ticket of tickets">
-        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.ticketId }}</td>
         <td>{{ ticket.title }}</td>
         <td>
           <span [ngClass]="{
@@ -25,7 +25,7 @@
             'text-success': ticket.status === 'CERRADO'
           }">{{ ticket.status }}</span>
         </td>
-        <td>{{ ticket.category.categoryName }}</td>
+        <td>{{ ticket.categoryName }}</td>
         <td>{{ ticket.clientId }}</td>
         <td>{{ ticket.createdAt | date:'short' }}</td>
         <td>
@@ -35,7 +35,7 @@
           </button>
         </td>
         <td>
-          <button class="btn btn-sm btn-outline-danger" (click)="eliminarTicket(ticket.id!)">
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminarTicket(ticket.ticketId!)">
             <i class="bi bi-trash"></i>
           </button>
         </td>

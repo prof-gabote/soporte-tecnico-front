@@ -22,7 +22,7 @@ export class ClientListComponent implements OnInit {
   }
 
   guardarEmail(client: Client) {
-    this.clientService.update(client.id!, client).subscribe({
+    this.clientService.update(client.clientId!, client).subscribe({
       next: () => this.toast.show('Correo actualizado correctamente', 'success'),
       error: () => this.toast.show('Error al guardar el correo', 'danger')
     });
@@ -32,7 +32,7 @@ export class ClientListComponent implements OnInit {
     this.toast.showConfirm('¿Eliminar cliente?', () => {
       this.clientService.delete(id).subscribe({
         next: () => {
-          this.clients = this.clients.filter(c => c.id !== id);
+          this.clients = this.clients.filter(c => c.clientId !== id);
           this.toast.show('Cliente eliminado', 'success');
         },
         error: () => this.toast.show('Error al eliminar cliente', 'danger')

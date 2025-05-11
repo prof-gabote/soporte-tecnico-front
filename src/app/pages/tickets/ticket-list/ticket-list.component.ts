@@ -28,7 +28,7 @@ export class TicketListComponent implements OnInit {
       status: nuevoEstado
     };
 
-    this.ticketService.update(ticket.id!, actualizado).subscribe({
+    this.ticketService.update(ticket.ticketId!, actualizado).subscribe({
       next: () => {
         ticket.status = nuevoEstado; // Actualiza localmente
       },
@@ -40,7 +40,7 @@ export class TicketListComponent implements OnInit {
     this.toast.showConfirm('¿Eliminar ticket?', () => {
       this.ticketService.delete(id).subscribe({
         next: () => {
-          this.tickets = this.tickets.filter(t => t.id !== id);
+          this.tickets = this.tickets.filter(t => t.ticketId !== id);
           this.toast.show('Ticket eliminado', 'success');
         },
         error: () => this.toast.show('Error al eliminar ticket', 'danger')

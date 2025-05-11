@@ -46,7 +46,7 @@ export class ClientFormComponent implements OnInit {
   onSubmit() {
     const client = {
       ...this.form.value,
-      company: { id: this.form.value.companyId }
+      company: { companyId: this.form.value.companyId }
     };
 
     this.clientService.create(client).subscribe(() => {

@@ -1,14 +1,15 @@
 export interface Ticket {
-  id?: number;
+  ticketId?: number;
   title: string;
   description: string;
   status: 'ABIERTO' | 'CERRADO';
   clientId: number;
-  category: Category;
+  categoryId: Category;
+  categoryName: string;
   createdAt?: string;
 }
 
 export interface Category {
-  id: number;
+  categoryId: number;
   categoryName: string;
 }

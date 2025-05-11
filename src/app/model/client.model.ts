@@ -1,5 +1,5 @@
 export interface Client {
-  id?: number;
+  clientId?: number;
   fullName: string;
   email: string;
   phoneNumber: string;
@@ -8,6 +8,6 @@ export interface Client {
 }
 
 export interface Company {
-  id: number;
+  companyId: number;
   companyName: string;
 }
